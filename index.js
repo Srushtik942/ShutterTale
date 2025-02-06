@@ -1,19 +1,9 @@
 const express = require('express');
+const { createNewUser} = require('./controllers/userController');
 const  app = express();
 app.use(express.json());
 
-app.post('/api/users',async(req,res)=>{
-    try{
-    let { username, email} = req.body;
-    let newUser = await createNewUser({username,email});
-    if(!username || !email){
-     res.status(404).json({error: "Invalid Username or Email"})
-    }
-    res.status(200).json(newUser);
-    }catch(error){
-        res.status(500).json({error: "Internal server errror!"})
-    }
-});
+app.post("/api/users", createNewUser);
 
 const PORT = 3000
 
