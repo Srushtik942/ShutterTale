@@ -5,7 +5,7 @@ const  app = express();
 app.use(express.json());
 
 app.post("/api/users", createNewUser);
-app.get("/api/photos",searchImages);
+app.get("/api/search/photos",searchImages);
 
 const PORT = 3000
 
