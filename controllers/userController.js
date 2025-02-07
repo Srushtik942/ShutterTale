@@ -28,8 +28,9 @@ const createNewUser = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Internal server error!", error: error.message }); // Fix: Removed redundant "error" key
+        return res.status(500).json({ message: "Internal server error!", error: error.message });
     }
 };
+
 
 module.exports = { createNewUser };
