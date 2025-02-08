@@ -9,6 +9,7 @@ const env = process.env.NODE_ENV || 'development';
 const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
+
 let sequelize;
 
   sequelize = new Sequelize(
@@ -42,10 +43,14 @@ fs
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {
     db[modelName].associate(db);
+
   }
 });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
+
+db.users = require('./users')(sequelize, Sequelize.DataTypes);
+db.photo = require('./photo')(sequelize,Sequelize.DataTypes);
 
 module.exports = db;

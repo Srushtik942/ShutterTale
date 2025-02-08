@@ -1,10 +1,11 @@
 const axiosInstance = require('../library/axios.lib');
 const UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY ;
 
+// Making API Calls to Unsplash
+
 if(!UNSPLASH_ACCESS_KEY){
     throw new Error('Missing Unsplash Key in .env file');
 }
-
 
 const searchImages =  async(req,res)=>{
     try{
@@ -35,6 +36,7 @@ const searchImages =  async(req,res)=>{
         res.status(500).json({error: 'Failed to fetch images'});
     }
 }
+
 
 module.exports = {
     searchImages,
