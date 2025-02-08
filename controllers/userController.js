@@ -58,7 +58,7 @@ const savePhotos = async(req,res)=>{
             userId
         })
 
-        return res.status(200).json({message: "Photo saved successfully", photo: newPhoto});
+        return res.status(200).json({message: "Photo saved successfully!", photo: newPhoto});
 
     }catch(error){
         console.log(error);

@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       {
         imageUrl: {
           type: DataTypes.STRING,
-          allow: false,
+          allowNull: false,
         },
         description: {
           type: DataTypes.STRING,
@@ -15,7 +15,9 @@ module.exports = (sequelize, DataTypes) => {
           type: DataTypes.STRING,
         },
         tags:{
-          type: DataTypes.STRING,
+          type: DataTypes.JSON,
+          allowNull: true,
+          references:{model: 'tags', key: 'id'},
         },
         dateSaved: {
           type: DataTypes.DATE,
@@ -23,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         userId: {
           type: DataTypes.INTEGER,
-          references: { model: 'user', key: 'id' },
+          references: { model: 'users', key: 'id' },
         },
       },
       {
@@ -33,7 +35,7 @@ module.exports = (sequelize, DataTypes) => {
 
     // Associations
     photo.associate = (models) => {
-      // photo.hasMany(models.tags, { foreignKey: 'photoId' });
+      // photo.hasMany(models.tag, { foreignKey: 'photoId' });
       photo.belongsTo(models.users, { foreignKey: 'userId' });
 
     }
