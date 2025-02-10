@@ -1,3 +1,4 @@
+const { where } = require('sequelize');
 const { users: userModel, photo:photModel} = require('../models');
 
 
@@ -70,4 +71,41 @@ const savePhotos = async(req,res)=>{
 }
 
 
-module.exports = { createNewUser, savePhotos };
+// Adding Tags for Photos
+
+const addTags = async(req,res)=>{
+    try{
+       const {photoId} = req.params;
+      const {tags} = req.body;
+
+    //   Maximum Tags:
+      if(tags && tags.length>5  ){
+        return res.status(400).json({message:"Tags should not be nore than 5"});
+      }
+      //tags validation
+      if(tags.length === 0){
+        return res.status(400).json({message:"Tags must be non-empty strings"});
+      }
+
+      const  photo = await photModel.findByPk(photoId);
+      if(!photo){
+        return res.status(404).json({message:"Photo not found!"});
+      }
+
+      const formatedTags =Array.isArray(tags)? tags:[];
+
+      const photoUpdate = await photModel.update({
+        tags: formatedTags
+      },
+      {
+        where: {id: photoId}
+      }
+    );
+
+      return res.status(200).json("Tags added succesfully!", );
+    }catch(error){
+        return res.status(500).json({message:"Internal server error!", error: error.message});
+    }
+}
+
+module.exports = { createNewUser, savePhotos, addTags };

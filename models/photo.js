@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
         tags:{
           type: DataTypes.ARRAY(DataTypes.STRING),
           allowNull: true,
-          // references:{model: 'tags', key: 'id'},
         },
         dateSaved: {
           type: DataTypes.DATE,

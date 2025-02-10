@@ -2,12 +2,14 @@ const express = require('express');
 const { createNewUser} = require('./controllers/userController');
 const{searchImages} = require('./controllers/imageController');
 const {savePhotos} = require('./controllers/userController');
+const {addTags} = require('./controllers/userController');
 const  app = express();
 app.use(express.json());
 
 app.post("/api/users", createNewUser);
 app.get("/api/search/photos",searchImages);
 app.post('/api/photos',savePhotos);
+app.post('/api/:photoId/tags',addTags);
 
 const PORT = 3000
 
