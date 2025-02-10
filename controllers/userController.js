@@ -46,15 +46,18 @@ const savePhotos = async(req,res)=>{
             return res.status(400).json({message : 'Invalid image URL'});
         }
 // tags validation
-        if(tags.length > 5 ){
+        if(tags && tags.length > 5 ){
             return res.status(400).json({message:'Tags should not be more than 5'});
         }
+
+        // ensure tags should be formatted in array
+        const formattedTags = Array.isArray(tags)? tags: [];
 
         const newPhoto = await photModel.create({
             imageUrl,
             description,
             altDescription,
-            tags,
+            tags : formattedTags,
             userId
         })
 
