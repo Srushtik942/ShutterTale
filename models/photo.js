@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
 
     // Associations
     photo.associate = (models) => {
-      // photo.hasMany(models.tag, { foreignKey: 'photoId' });
+      // photo.hasMany(models.tags, { through:models.tags, foreignKey: 'photoId' });
       photo.belongsTo(models.users, { foreignKey: 'userId' });
 
     }

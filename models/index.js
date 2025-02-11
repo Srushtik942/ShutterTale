@@ -52,5 +52,8 @@ db.Sequelize = Sequelize;
 
 db.users = require('./users')(sequelize, Sequelize.DataTypes);
 db.photo = require('./photo')(sequelize,Sequelize.DataTypes);
+db.tags = require('./tags')(sequelize, Sequelize.DataTypes);
+db.searchHistory = require('./searchHistory')(sequelize,Sequelize.DataTypes);
+
 
 module.exports = db;

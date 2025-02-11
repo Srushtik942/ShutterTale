@@ -11,7 +11,7 @@ app.post("/api/users", createNewUser);
 app.get("/api/search/photos",searchImages);
 app.post('/api/photos',savePhotos);
 app.post('/api/:photoId/tags',addTags);
-app.get('/api/photos/tag',searchPhotosByTags);
+app.get('/api/photos/tag/search',searchPhotosByTags);
 // app.get('/api/search-history',trackHistory);
 
 const PORT = 3000

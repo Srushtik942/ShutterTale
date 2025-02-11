@@ -1,7 +1,9 @@
-const { where } = require('sequelize');
+const { Op } = require('sequelize');
 const axiosInstance = require('../library/axios.lib');
 const UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY ;
-const { photo:photModel, tags: tagModel} = require('../models');
+const { photo:photModel,tags: tagModel,searchHistory:searchHistoryModel} = require('../models');
+const { query } = require('express');
+
 
 // Making API Calls to Unsplash
 
@@ -42,25 +44,40 @@ const searchImages =  async(req,res)=>{
 
 const searchPhotosByTags = async(req,res)=>{
     try{
-        const {tag , sortOrder = 'ASC'} = req.query;
+        const {tag , sort = 'ASC', userId} = req.query;
 
      // Tag Validation
      if(!tag){
-        return res.status(400).json({message:"Tag is required for seraching query!"});
+        return res.status(400).json({message:"Tag is required for searching query!"});
      }
 
      //tag exists in db or not
      const tagExist = await tagModel.findOne({where:{name: tag}});
 
-     const photoIds = await tagExist.findByPk({photoId});
+     if(!tagExist){
+
+        return res.status(404).json({message: "Tag not found!"});
+     }
+
 
      const photos = await photModel.findAll({
         where :{
-            tags:{tag}
+            tags:{
+                [Op.contains]:[tag]
+            }
         },
-        order :[['dateSaved']]
-     })
-    return res.status(200).json({message:"Photos retrived successfully!",photos})
+        order :[['dateSaved', sort.toUpperCase() === 'DESC' ? 'DESC' : 'ASC']],
+     });
+
+        // Log the search query in history
+
+        if(userId){
+            console.log(`logging history! ${userId}`);
+            await searchHistoryModel.create({
+                userId, query: tag
+            })
+        }
+    return res.status(200).json({message:"Photos retrived!",photos})
 
     }catch(error){
         return res.status(500).json({message:"Internal Server Error!", error: error.message});
