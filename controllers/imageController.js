@@ -2,7 +2,7 @@ const { Op } = require('sequelize');
 const axiosInstance = require('../library/axios.lib');
 const UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY ;
 const { photo:photModel,tags: tagModel,searchHistory:searchHistoryModel} = require('../models');
-const { query } = require('express');
+// const { query } = require('express');
 
 
 // Making API Calls to Unsplash
@@ -52,7 +52,13 @@ const searchPhotosByTags = async(req,res)=>{
      }
 
      //tag exists in db or not
-     const tagExist = await tagModel.findOne({where:{name: tag}});
+     const tagExist = await tagModel.findOne({
+        where:{
+            name:{
+                [Op.iLike]: tag.trim()
+            }
+        }
+    });
 
      if(!tagExist){
 
@@ -72,9 +78,11 @@ const searchPhotosByTags = async(req,res)=>{
         // Log the search query in history
 
         if(userId){
-            console.log(`logging history! ${userId}`);
+            // console.log(`logging history! ${userId}`);
+
             await searchHistoryModel.create({
-                userId, query: tag
+                userId,
+                query: tag
             })
         }
     return res.status(200).json({message:"Photos retrived!",photos})

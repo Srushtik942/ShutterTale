@@ -4,7 +4,7 @@ module.exports = (sequelize,DataTypes) => {
         username: DataTypes.STRING,
         email:DataTypes.STRING
     },{
-        timestamps: true
+        timestamps: false
     }
     );
     users.associate = (models) =>{
