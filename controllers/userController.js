@@ -20,7 +20,7 @@ const createNewUser = async (req, res) => {
 
         // Check if user already exists
         if (await doesUserExist(email)) {
-            return res.status(400).json({ message: "User already exists!" });
+            return res.status(400).json({message : "User already exists!"});
         }
 
         // Create new user
