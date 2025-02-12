@@ -4,6 +4,7 @@ const{searchImages} = require('./controllers/imageController');
 const {savePhotos} = require('./controllers/userController');
 const {addTags} = require('./controllers/userController');
 const {searchPhotosByTags} = require('./controllers/imageController')
+const {trackHistory} = require('./controllers/imageController')
 const  app = express();
 app.use(express.json());
 
@@ -12,7 +13,7 @@ app.get("/api/search/photos",searchImages);
 app.post('/api/photos',savePhotos);
 app.post('/api/:photoId/tags',addTags);
 app.get('/api/photos/tag/search',searchPhotosByTags);
-// app.get('/api/search-history',trackHistory);
+app.get('/api/search-history',trackHistory);
 
 const PORT = 3000
 

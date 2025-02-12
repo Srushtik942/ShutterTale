@@ -29,17 +29,17 @@ describe('API Endpoints',()=>{
     //testing user has created
     it('should return  201',async()=>{
         const response = await request(server).post('/api/users').send({
-            username: 'Saksham',
-            email: 'saksham@gmail.com',
+            username: 'Rugved',
+            email: 'rugved@gmail.com',
         });
         console.log(response.body);
         expect(response.statusCode).toBe(201);
         expect(response.body).toEqual({
                 'message': 'User created successfully!',
                 'user': {
-                    'id': 22,
-                    'username': 'Saksham',
-                    'email': 'saksham@gmail.com',
+                    'id': 41,
+                    'username': 'Rugved',
+                    'email': 'rugved@gmail.com',
                 }
 
         })

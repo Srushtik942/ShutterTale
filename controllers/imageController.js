@@ -1,7 +1,8 @@
-const { Op } = require('sequelize');
+const { Op, where } = require('sequelize');
 const axiosInstance = require('../library/axios.lib');
 const UNSPLASH_ACCESS_KEY = process.env.UNSPLASH_ACCESS_KEY ;
-const { photo:photModel,tags: tagModel,searchHistory:searchHistoryModel} = require('../models');
+const { photo:photModel,tags: tagModel,searchHistory:searchHistoryModel, tags} = require('../models');
+const { query } = require('express');
 // const { query } = require('express');
 
 
@@ -52,10 +53,10 @@ const searchPhotosByTags = async(req,res)=>{
      }
 
      //tag exists in db or not
-     const tagExist = await tagModel.findOne({
+     const tagExist = await photModel.findOne({
         where:{
-            name:{
-                [Op.iLike]: tag.trim()
+            tags:{
+               [Op.contains]:[tag.trim()]
             }
         }
     });
@@ -92,7 +93,28 @@ const searchPhotosByTags = async(req,res)=>{
     }
 }
 
+
+const trackHistory = async(req,res)=>{
+    try{
+    const {userId} = req.query;
+
+    const id = await searchHistoryModel.findAll({
+        where:{
+            userId
+        },
+        order: [['query'],['timestamp']]
+    });
+res.status(200).json({id});
+}
+catch(error){
+    res.status(500).json({message:"Internal server error!",error:error.message});
+}
+
+
+}
+
 module.exports = {
     searchImages,
-    searchPhotosByTags
+    searchPhotosByTags,
+    trackHistory
 }
