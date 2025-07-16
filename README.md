@@ -13,12 +13,19 @@
   - sequelize
   - sequelize-cli
   - supertest
-- Making API Calls to create Users
-  - Writing POST method to create new user
-  - Creating a userController function for post methods and imagesCOntrollers for get methods
-  - Creating validation for is email already existed or not
-- Making API Calls to Unsplash
-  - Writing Get method to get a paticular image by using query
-  - Creating a function in imageControllers as it is a get method
-  - Making API call to unsplash using axios library.
--
+
+- Features
+  - RESTful API endpoints for photo upload, retrieval, and organization
+  - File upload handling using Multer middleware
+  - MySql schema design for users, albums, and photos
+  - Efficient image storage and retrieval
+  - Simple and scalable backend architecture using Node.js and Express
+
+- Installation
+ - clone the repo
+   - git clone https://github.com/Srushtik942/ShutterTale.git
+   - cd ShutterTale
+   - Install dependencies (npm install)
+- npm start 
+
+
