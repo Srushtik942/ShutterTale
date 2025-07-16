@@ -1,5 +1,5 @@
 # ShutterTale
-- ShutterTale is a photo curation app where users can search for images using the  API, save them to collections, add tags, search by tags, and track search history.(using live unsplash api key)
+-ShutterTale is a backend photo management system inspired by Google Photos. It provides APIs to upload, organize, and retrieve photos with efficient handling of file uploads and database storage.
 
 - Initialized a Node.js project.
   - npm init
