@@ -2,6 +2,11 @@
 
 Shuttertale is a backend application built with **Node.js**, **Express**, and **Sequelize**, serving as the core API for managing user-submitted photos, tags, and image search functionality powered by **Unsplash API**. It supports PostgreSQL (hosted on Supabase) and is deployed via **Vercel serverless functions**.
 
+![deployment](image/photo.png)
+![Post Request](image-3.png)
+
+
+
 ---
 
 ## 🔧 Tech Stack
@@ -82,6 +87,3 @@ npx sequelize db:migrate
 Seed data:
 npx sequelize db:seed:all
 
----
-
-![deployment](image/photo.png)
