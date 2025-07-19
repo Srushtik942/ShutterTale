@@ -82,8 +82,6 @@ npx sequelize db:migrate
 Seed data:
 npx sequelize db:seed:all
 
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-4.png)
+---
 
-
+![deployment](image/photo.png)
